@@ -1,314 +1,95 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+const LOCATION_URL =
+    "https://maps.app.goo.gl/WxQ7GfCKb5vkETHJ6?g_st=ic";
+
+const RSVP_URL =
+    "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+const locationBtn = document.getElementById("locationBtn");
+
+if (locationBtn) {
+    locationBtn.addEventListener("click", () => {
+        window.open(LOCATION_URL, "_blank");
+    });
 }
 
-html {
-    scroll-behavior: smooth;
+const scrollBtn = document.getElementById("scrollToRSVP");
+
+if (scrollBtn) {
+    scrollBtn.addEventListener("click", () => {
+        document.getElementById("rsvp").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
 }
 
-body {
-    font-family: 'Cairo', sans-serif;
-    background: #4f0f1d;
-    color: #fff;
-    overflow-x: hidden;
-    position: relative;
-}
+const form = document.getElementById("rsvpForm");
+const message = document.getElementById("message");
 
-.background-glow {
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at top, rgba(255, 215, 170, 0.15), transparent 40%),
-        radial-gradient(circle at bottom, rgba(184, 139, 59, 0.12), transparent 45%);
-    pointer-events: none;
-    z-index: 0;
-}
+if (form) {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-.hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    position: relative;
-}
+        const submitButton = form.querySelector('button[type="submit"]');
 
-.curtain {
-    position: absolute;
-    top: 0;
-    width: 180px;
-    height: 280px;
-    background: linear-gradient(90deg, #5b1020, #7a1730, #5b1020);
-    opacity: 0.9;
-    z-index: 1;
-}
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const guests =
+            parseInt(document.getElementById("guests").value, 10) || 1;
+        const notes = document.getElementById("notes").value.trim();
 
-.curtain.left {
-    left: 0;
-    border-bottom-right-radius: 70px;
-}
+        const attendance = document.querySelector(
+            'input[name="attendance"]:checked'
+        ).value;
 
-.curtain.right {
-    right: 0;
-    border-bottom-left-radius: 70px;
-}
+        if (!name) {
+            message.textContent = "يرجى إدخال الاسم";
+            message.style.color = "#ffb3b3";
+            return;
+        }
 
-.invitation-card {
-    width: 100%;
-    max-width: 850px;
-    background: #f5ebdd;
-    color: #4f0f1d;
-    border-radius: 26px;
-    padding: 50px 30px;
-    text-align: center;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
-    animation: fadeIn 1.3s ease;
-    position: relative;
-    z-index: 2;
-    border: 2px solid rgba(184, 139, 59, 0.45);
-}
+        if (RSVP_URL === "PUT_GOOGLE_APPS_SCRIPT_URL_HERE") {
+            message.textContent =
+                "ضعي رابط Google Apps Script أولاً داخل ملف script.js";
+            message.style.color = "#ffb3b3";
+            return;
+        }
 
-.chandelier {
-    font-size: 3rem;
-    color: #b88b3b;
-    margin-bottom: 20px;
-    animation: floatGlow 3s ease-in-out infinite;
-}
+        try {
+            submitButton.disabled = true;
+            submitButton.textContent = "جاري الإرسال...";
 
-.bismillah {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
+            await fetch(RSVP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    guests,
+                    attendance,
+                    notes
+                })
+            });
 
-.verse {
-    line-height: 2;
-    margin-bottom: 30px;
-    color: #6d4451;
-    font-size: 0.95rem;
-}
+            message.textContent =
+                attendance === "yes"
+                    ? "شكراً لتأكيد حضوركم ♥"
+                    : "شكراً لإشعارنا بعدم التمكن من الحضور";
 
-.invite-text {
-    line-height: 2;
-    margin-bottom: 30px;
-    font-size: 1.05rem;
-}
+            message.style.color = "#8cffb0";
 
-.names {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
+            form.reset();
 
-.names h1 {
-    font-size: 3rem;
-    color: #6f1028;
-    font-weight: 700;
-}
-
-.names span {
-    font-size: 2rem;
-    color: #b88b3b;
-}
-
-.ornament {
-    width: 180px;
-    height: 2px;
-    background: #b88b3b;
-    margin: 30px auto;
-    position: relative;
-}
-
-.ornament::before {
-    content: "✦";
-    position: absolute;
-    top: -13px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #b88b3b;
-    background: #f5ebdd;
-    padding: 0 10px;
-}
-
-.details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.detail-box {
-    background: rgba(255, 255, 255, 0.78);
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(184, 139, 59, 0.25);
-}
-
-.detail-box h3 {
-    color: #6f1028;
-    margin-bottom: 10px;
-}
-
-.detail-box p {
-    color: #4f0f1d;
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 35px;
-}
-
-.btn {
-    border: none;
-    cursor: pointer;
-    padding: 14px 30px;
-    border-radius: 30px;
-    background: #6f1028;
-    color: white;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: 0.3s ease;
-    box-shadow: 0 8px 20px rgba(111, 16, 40, 0.25);
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    background: #8d1736;
-}
-
-.btn.secondary {
-    background: #b88b3b;
-    color: #fff;
-}
-
-.btn.secondary:hover {
-    background: #c89a46;
-}
-
-.rsvp-section {
-    padding: 80px 20px;
-    max-width: 720px;
-    margin: auto;
-    position: relative;
-    z-index: 2;
-}
-
-.rsvp-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: #f5ebdd;
-}
-
-#rsvpForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background: rgba(245, 235, 221, 0.12);
-    padding: 25px;
-    border-radius: 24px;
-    border: 1px solid rgba(184, 139, 59, 0.3);
-    backdrop-filter: blur(6px);
-}
-
-input,
-textarea {
-    width: 100%;
-    border: none;
-    border-radius: 14px;
-    padding: 14px;
-    font-family: inherit;
-    font-size: 1rem;
-    outline: none;
-}
-
-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.attendance-options {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
-}
-
-.attendance-options label {
-    background: white;
-    color: #4f0f1d;
-    padding: 12px 18px;
-    border-radius: 14px;
-    cursor: pointer;
-}
-
-.attendance-options input {
-    width: auto;
-    margin-left: 6px;
-}
-
-#message {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: 700;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #f1d7c2;
-    position: relative;
-    z-index: 2;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes floatGlow {
-    0%,
-    100% {
-        transform: translateY(0);
-        text-shadow: 0 0 10px rgba(184, 139, 59, 0.3);
-    }
-
-    50% {
-        transform: translateY(-8px);
-        text-shadow: 0 0 25px rgba(184, 139, 59, 0.75);
-    }
-}
-
-@media (max-width: 768px) {
-    .invitation-card {
-        padding: 40px 22px;
-    }
-
-    .names h1 {
-        font-size: 2.2rem;
-    }
-
-    .curtain {
-        width: 90px;
-        height: 180px;
-    }
-
-    .verse {
-        font-size: 0.85rem;
-    }
+            document.querySelector('input[value="yes"]').checked = true;
+        } catch (error) {
+            message.textContent =
+                "تعذر إرسال البيانات، يرجى المحاولة مرة أخرى";
+            message.style.color = "#ffb3b3";
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "إرسال";
+        }
+    });
 }
