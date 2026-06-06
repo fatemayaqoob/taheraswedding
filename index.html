@@ -7,61 +7,68 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <main class="invite-page">
-        <div class="glow"></div>
-
+        <div class="ambient-glow"></div>
         <section class="card">
             <div class="curtain curtain-left"></div>
             <div class="curtain curtain-right"></div>
-
-            <div class="chandelier">✦</div>
-
-            <p class="bismillah">بسم الله الرحمن الرحيم</p>
-
+            <div class="chandelier">
+                ✦
+            </div>
+            <p class="bismillah">
+                بسم الله الرحمن الرحيم
+            </p>
             <p class="verse">
                 وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
                 <br>
                 لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
             </p>
-
             <p class="invite-text">
                 الحمد لله الذي تتم بنعمته الصالحات
                 <br>
                 نتشرف بدعوتكم لحضور حفل زفاف
             </p>
-
-            <div class="names">
-                <h1>مصطفى</h1>
-                <span>&</span>
-                <h1>طاهرة</h1>
+            <div class="logo-box">
+                <img
+                    src="logo.jpeg"
+                    alt="شعار مصطفى وطاهرة">
             </div>
-
-            <p class="blessing">وذلك بمشيئة الله تعالى</p>
-
+            <p class="blessing">
+                وذلك بمشيئة الله تعالى
+            </p>
             <div class="details">
                 <div>
-                    <h3>التاريخ</h3>
-                    <p>14 / 06 / 2026</p>
-                </div>
-
-                <div>
-                    <h3>الوقت</h3>
+                    <h3>في تمام الساعة</h3>
                     <p>8:30 مساءً</p>
                 </div>
-
+                <div>
+                    <h3>التاريخ</h3>
+                    <p>14 . 6 . 2026</p>
+                </div>
                 <div>
                     <h3>الموقع</h3>
-                    <p>صالة الخير - عالي</p>
+                    <p>Water Lily</p>
                 </div>
             </div>
-
-            <button id="locationBtn" class="location-btn">
+            <button
+                id="locationBtn"
+                class="main-btn">
                 عرض الموقع
             </button>
-
+            <button
+                id="musicBtn"
+                class="music-btn">
+                تشغيل الموسيقى
+            </button>
+            <audio id="bgMusic" loop>
+                <source
+                    src="music.mp3"
+                    type="audio/mpeg">
+            </audio>
             <p class="note">
+                نوماً هنيئاً لأطفالكم
+                <br>
                 الدعوة خاصة
             </p>
         </section>
