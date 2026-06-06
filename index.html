@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف مصطفى و طاهرة</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <section class="hero">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+        <div class="invitation-card">
+            <div class="chandelier">
+                ✦
+            </div>
+            <p class="bismillah">
+                بسم الله الرحمن الرحيم
+            </p>
+            <p class="verse">
+                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+            </p>
+            <p class="invite-text">
+                يتشرف
+                <br>
+                مصطفى و طاهرة
+                <br>
+                بدعوتكم لمشاركتهم فرحة زفافهم
+            </p>
+            <div class="names">
+                <h1>مصطفى</h1>
+                <span>&</span>
+                <h1>طاهرة</h1>
+            </div>
+            <div class="ornament"></div>
+            <div class="details">
+                <div class="detail-box">
+                    <h3>التاريخ</h3>
+                    <p>14 / 06 / 2026</p>
+                </div>
+                <div class="detail-box">
+                    <h3>الوقت</h3>
+                    <p>8:30 مساءً</p>
+                </div>
+                <div class="detail-box">
+                    <h3>الموقع</h3>
+                    <p>صالة الخير - عالي</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="locationBtn" class="btn">
+                    عرض الموقع
+                </button>
+                <button id="scrollToRSVP" class="btn secondary">
+                    تأكيد الحضور
+                </button>
+            </div>
+        </div>
+    </section>
+    <section id="rsvp" class="rsvp-section">
+        <h2>تأكيد الحضور</h2>
+        <form id="rsvpForm">
+            <input
+                type="text"
+                id="name"
+                placeholder="الاسم"
+                required>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="رقم الهاتف">
+            <input
+                type="number"
+                id="guests"
+                min="1"
+                value="1"
+                placeholder="عدد الحضور">
+            <textarea
+                id="notes"
+                placeholder="ملاحظات"></textarea>
+            <div class="attendance-options">
+                <label>
+                    <input
+                        type="radio"
+                        name="attendance"
+                        value="yes"
+                        checked>
+                    سأحضر
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="attendance"
+                        value="no">
+                    لن أتمكن من الحضور
+                </label>
+            </div>
+            <button type="submit" class="btn">
+                إرسال
+            </button>
+        </form>
+        <div id="message"></div>
+    </section>
+    <footer>
+        ننتظركم بكل الحب ♥
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
