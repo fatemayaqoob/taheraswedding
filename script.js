@@ -1,7 +1,7 @@
 const LOCATION_URL =
     "https://maps.app.goo.gl/WxQ7GfCKb5vkETHJ6?g_st=ic";
 
-const RSVP_URL = "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
+const RSVP_URL = "https://script.google.com/macros/s/AKfycbwtrpmUIg_j0d469HizCNZFi5nOgyKgZTH2LwaApuWgf9zYvY8u-fn4uV8HMCcSyOAq/exec";
 
 const locationBtn =
     document.getElementById("locationBtn");
