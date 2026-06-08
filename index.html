@@ -30,9 +30,9 @@
             </p>
 
             <p class="verse">
-                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
                 <br>
-                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
             </p>
 
             <p class="invite-text">
@@ -83,6 +83,85 @@
                 </p>
 
             </div>
+
+            <form id="rsvpForm" class="rsvp-form">
+
+                <div class="rsvp-heading">
+                    <h2>تأكيد الحضور</h2>
+                    <p>يسعدنا مشاركتكم فرحتنا</p>
+                </div>
+
+                <div class="rsvp-fields">
+                    <label>
+                        <span>الاسم</span>
+                        <input
+                            id="rsvpName"
+                            name="name"
+                            type="text"
+                            autocomplete="name"
+                            required>
+                    </label>
+
+                    <label>
+                        <span>رقم الهاتف</span>
+                        <input
+                            id="rsvpPhone"
+                            name="phone"
+                            type="tel"
+                            autocomplete="tel">
+                    </label>
+
+                    <label>
+                        <span>عدد الحضور</span>
+                        <input
+                            id="rsvpGuests"
+                            name="guests"
+                            type="number"
+                            min="0"
+                            inputmode="numeric">
+                    </label>
+
+                    <label>
+                        <span>ملاحظات</span>
+                        <textarea
+                            id="rsvpNotes"
+                            name="notes"
+                            rows="3"></textarea>
+                    </label>
+                </div>
+
+                <div class="attendance-options">
+                    <label class="attendance-card">
+                        <input
+                            type="radio"
+                            name="attendance"
+                            value="يشرفنا حضوركم"
+                            checked>
+                        <span>يشرفنا حضوركم</span>
+                    </label>
+
+                    <label class="attendance-card">
+                        <input
+                            type="radio"
+                            name="attendance"
+                            value="نعتذر عن عدم التمكن من الحضور">
+                        <span>نعتذر عن عدم التمكن من الحضور</span>
+                    </label>
+                </div>
+
+                <button
+                    id="rsvpSubmit"
+                    class="rsvp-submit"
+                    type="submit">
+                    إرسال التأكيد
+                </button>
+
+                <p
+                    id="rsvpMessage"
+                    class="rsvp-message"
+                    aria-live="polite"></p>
+
+            </form>
 
             <button
                 id="locationBtn"

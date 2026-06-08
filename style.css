@@ -124,6 +124,7 @@ body {
 .blessing,
 .details,
 .event-notes,
+.rsvp-form,
 .main-btn,
 .music-btn {
     position: relative;
@@ -213,6 +214,159 @@ body {
     font-size: 0.88rem;
     line-height: 1.9;
     color: #5b3540;
+}
+
+.rsvp-form {
+    width: 100%;
+    max-width: 580px;
+    margin: 28px auto 16px;
+    padding: 22px 20px;
+    border: 1px solid rgba(92, 14, 25, 0.32);
+    border-radius: 18px;
+    background:
+        linear-gradient(180deg, rgba(255, 239, 224, 0.42), rgba(157, 91, 75, 0.18)),
+        rgba(255, 234, 217, 0.24);
+    box-shadow:
+        inset 0 0 28px rgba(255, 242, 224, 0.28),
+        0 16px 34px rgba(70, 8, 20, 0.16);
+}
+
+.rsvp-heading {
+    margin-bottom: 18px;
+}
+
+.rsvp-heading h2 {
+    font-size: 1.18rem;
+    color: #4f0b1b;
+    margin-bottom: 4px;
+}
+
+.rsvp-heading p {
+    font-size: 0.86rem;
+    color: #68404a;
+}
+
+.rsvp-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.rsvp-fields label {
+    text-align: right;
+}
+
+.rsvp-fields label:last-child {
+    grid-column: 1 / -1;
+}
+
+.rsvp-fields span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #45101a;
+}
+
+.rsvp-fields input,
+.rsvp-fields textarea {
+    width: 100%;
+    border: 1px solid rgba(92, 14, 25, 0.28);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: #2a0209;
+    background: rgba(255, 246, 237, 0.72);
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.rsvp-fields textarea {
+    resize: vertical;
+    min-height: 84px;
+}
+
+.rsvp-fields input:focus,
+.rsvp-fields textarea:focus {
+    border-color: rgba(139, 23, 52, 0.72);
+    box-shadow: 0 0 0 3px rgba(139, 23, 52, 0.12);
+    background: rgba(255, 250, 246, 0.92);
+}
+
+.attendance-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 16px 0 14px;
+}
+
+.attendance-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 10px;
+    border: 1px solid rgba(92, 14, 25, 0.28);
+    border-radius: 999px;
+    color: #4f0b1b;
+    background: rgba(255, 246, 237, 0.48);
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.attendance-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.attendance-card span {
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.attendance-card:has(input:checked) {
+    color: #fff;
+    border-color: rgba(75, 7, 23, 0.85);
+    background: linear-gradient(135deg, #4b0717, #8b1734);
+    box-shadow: 0 10px 22px rgba(65, 3, 18, 0.25);
+}
+
+.rsvp-submit {
+    margin-top: 2px;
+    padding: 11px 32px;
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.96rem;
+    color: #fff;
+    background: linear-gradient(135deg, #4b0717, #8b1734);
+    box-shadow: 0 10px 25px rgba(65, 3, 18, 0.34);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.rsvp-submit:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(65, 3, 18, 0.46);
+}
+
+.rsvp-submit:disabled {
+    cursor: wait;
+    opacity: 0.72;
+}
+
+.rsvp-message {
+    min-height: 28px;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #4f0b1b;
+}
+
+.rsvp-message.error {
+    color: #8b1734;
 }
 
 .main-btn,
@@ -349,5 +503,19 @@ body {
 
     .event-notes p:last-child {
         font-size: 0.82rem;
+    }
+
+    .rsvp-form {
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+
+    .rsvp-fields,
+    .attendance-options {
+        grid-template-columns: 1fr;
+    }
+
+    .attendance-card {
+        border-radius: 14px;
     }
 }
