@@ -4,252 +4,288 @@
     box-sizing: border-box;
 }
 
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: "Cairo", sans-serif;
-    background: #180308;
     min-height: 100vh;
+    font-family: "Cairo", sans-serif;
+    color: #2d070d;
+    background: #190308;
     overflow-x: hidden;
 }
 
 .invite-page {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 12px;
+    justify-content: center;
+    padding: 18px;
     background:
-        radial-gradient(circle at 50% 8%, rgba(255, 205, 160, 0.24), transparent 35%),
-        linear-gradient(180deg, #4d0818 0%, #21030a 100%);
+        radial-gradient(circle at 50% 5%, rgba(255, 222, 174, 0.24), transparent 28%),
+        radial-gradient(circle at 50% 92%, rgba(116, 10, 35, 0.48), transparent 36%),
+        linear-gradient(180deg, #5b0a1e 0%, #2b050d 42%, #120105 100%);
 }
 
-.ambient-glow {
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at 50% 18%, rgba(255, 210, 170, 0.22), transparent 36%),
-        radial-gradient(circle at 50% 90%, rgba(95, 5, 25, 0.75), transparent 48%);
-    animation: glowPulse 5s ease-in-out infinite;
-    pointer-events: none;
-}
-
-.card {
-    width: 100%;
-    max-width: 760px;
-    min-height: 96vh;
+.invitation-card {
+    width: min(100%, 760px);
+    min-height: 94vh;
     position: relative;
     overflow: hidden;
     text-align: center;
-    color: #2a0209;
-    padding: 115px 28px 42px;
+    border-radius: 26px;
+    border: 1px solid rgba(235, 185, 135, 0.46);
+    padding: 145px 34px 155px;
+    background:
+        linear-gradient(90deg, rgba(75, 7, 23, 0.46), transparent 12%, transparent 88%, rgba(75, 7, 23, 0.46)),
+        radial-gradient(circle at 50% 32%, rgba(255, 245, 226, 0.9), rgba(237, 201, 183, 0.76) 37%, rgba(184, 124, 104, 0.82) 74%, rgba(94, 20, 29, 0.9) 100%);
+    box-shadow:
+        0 34px 95px rgba(0, 0, 0, 0.58),
+        inset 0 0 70px rgba(95, 20, 24, 0.28),
+        inset 0 0 0 9px rgba(255, 238, 215, 0.08);
+    animation: cardFadeIn 1.35s ease both;
+}
+
+.invitation-card::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    z-index: 1;
+    border: 1px solid rgba(112, 20, 34, 0.22);
     border-radius: 20px;
     background:
-        linear-gradient(90deg, rgba(70, 5, 17, 0.55), transparent 11%, transparent 89%, rgba(70, 5, 17, 0.55)),
-        linear-gradient(180deg, #a56f61 0%, #edcabc 35%, #d2a08e 70%, #9e6a5d 100%);
-    border: 1.5px solid rgba(155, 89, 62, 0.8);
-    box-shadow:
-        0 30px 90px rgba(0, 0, 0, 0.55),
-        inset 0 0 55px rgba(95, 25, 25, 0.25);
-    animation: cardEnter 1.3s ease both;
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at center, rgba(255, 235, 215, 0.32), transparent 43%),
-        radial-gradient(circle at bottom, rgba(92, 5, 25, 0.28), transparent 36%);
+        radial-gradient(circle at center, rgba(255, 249, 239, 0.24), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 50%, rgba(88, 6, 21, 0.12));
     pointer-events: none;
 }
 
-.card::after {
+.invitation-card::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 38px 38px;
-    opacity: 0.35;
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.42;
     pointer-events: none;
 }
 
-.curtain {
+.ambient-glow {
     position: absolute;
-    top: 0;
-    width: 52%;
-    height: 190px;
-    z-index: 4;
+    inset: 0;
+    z-index: 0;
     background:
-        repeating-linear-gradient(
-            90deg,
-            #180207 0px,
-            #4d0718 16px,
-            #7d1230 30px,
-            #310611 48px
-        );
-    box-shadow:
-        inset 0 -28px 34px rgba(0, 0, 0, 0.6),
-        0 8px 20px rgba(40, 0, 8, 0.45);
+        radial-gradient(circle at 50% 18%, rgba(255, 223, 168, 0.32), transparent 34%),
+        radial-gradient(circle at 18% 82%, rgba(255, 188, 146, 0.18), transparent 25%),
+        radial-gradient(circle at 82% 78%, rgba(255, 188, 146, 0.16), transparent 25%);
+    animation: glowPulse 5.5s ease-in-out infinite;
+    pointer-events: none;
 }
 
-.curtain-left {
-    left: 0;
-    border-bottom-right-radius: 98%;
-    animation: curtainSwayLeft 5s ease-in-out infinite;
+.decor {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    user-select: none;
 }
 
-.curtain-right {
-    right: 0;
-    border-bottom-left-radius: 98%;
-    animation: curtainSwayRight 5s ease-in-out infinite;
-}
-
-.chandelier {
-    position: relative;
+.decor-curtains {
+    top: -16px;
+    left: 50%;
     z-index: 5;
-    font-size: 4.2rem;
-    color: #c8915c;
-    margin-bottom: 54px;
-    text-shadow:
-        0 0 10px rgba(255, 220, 170, 0.9),
-        0 0 28px rgba(255, 188, 125, 0.75);
-    animation: chandelierFloat 3.5s ease-in-out infinite;
+    width: 112%;
+    max-width: none;
+    transform: translateX(-50%);
+    transform-origin: top center;
+    filter: drop-shadow(0 18px 18px rgba(34, 0, 8, 0.42));
+    animation: curtainSway 6.5s ease-in-out infinite;
 }
 
-.bismillah,
-.verse,
-.invite-text,
-.logo-box,
-.blessing,
-.details,
-.event-notes,
-.rsvp-form,
-.main-btn,
-.music-btn {
+.decor-chandelier {
+    top: 18px;
+    left: 50%;
+    z-index: 6;
+    width: min(210px, 38vw);
+    transform: translateX(-50%);
+    filter:
+        drop-shadow(0 0 12px rgba(255, 220, 158, 0.88))
+        drop-shadow(0 0 32px rgba(255, 191, 112, 0.62));
+    animation: chandelierFloat 4.2s ease-in-out infinite;
+}
+
+.decor-flowers {
+    right: 50%;
+    bottom: -22px;
+    z-index: 4;
+    width: 112%;
+    max-width: none;
+    transform: translateX(50%);
+    filter: drop-shadow(0 -16px 22px rgba(73, 7, 20, 0.22));
+    animation: flowersDrift 7.5s ease-in-out infinite;
+}
+
+.decor-candles {
+    bottom: 42px;
+    z-index: 5;
+    width: min(142px, 24vw);
+    opacity: 0.92;
+    filter:
+        drop-shadow(0 0 9px rgba(255, 207, 134, 0.55))
+        drop-shadow(0 12px 16px rgba(56, 5, 15, 0.25));
+    animation: candleFlicker 2.8s ease-in-out infinite;
+}
+
+.decor-candles-left {
+    left: 24px;
+}
+
+.decor-candles-right {
+    right: 24px;
+    transform: scaleX(-1);
+    animation-delay: 0.55s;
+}
+
+.content {
     position: relative;
-    z-index: 3;
+    z-index: 8;
+    width: 100%;
+    max-width: 590px;
+    margin: 0 auto;
 }
 
 .bismillah {
-    font-size: 1.35rem;
-    font-weight: 700;
     margin-bottom: 18px;
+    font-size: clamp(1.08rem, 2.4vw, 1.42rem);
+    font-weight: 800;
+    color: #4f0b1b;
 }
 
 .verse {
-    font-size: 0.96rem;
-    line-height: 2;
-    margin-bottom: 28px;
+    margin: 0 auto 24px;
+    max-width: 560px;
+    font-size: clamp(0.82rem, 1.8vw, 0.98rem);
+    line-height: 2.05;
+    color: #3e1118;
 }
 
-.invite-text {
-    font-size: 1.08rem;
-    line-height: 2.1;
+.praise {
+    margin-bottom: 12px;
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    line-height: 1.9;
+    color: #4a1a22;
+}
+
+.wedding-title {
     margin-bottom: 18px;
+    font-size: clamp(1.55rem, 4.5vw, 2.45rem);
+    font-weight: 800;
+    line-height: 1.45;
+    color: #4d0818;
+    text-shadow:
+        0 1px 0 rgba(255, 247, 236, 0.65),
+        0 10px 24px rgba(83, 8, 23, 0.16);
 }
 
-.logo-box {
-    margin: 22px auto 18px;
-    display: flex;
-    justify-content: center;
+.logo-frame {
+    width: min(330px, 76vw);
+    margin: 0 auto 24px;
+    animation: logoFloat 4.8s ease-in-out infinite;
 }
 
-.logo-box img {
-    width: min(330px, 82vw);
-    opacity: 0.92;
+.logo-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.96;
     filter:
-        sepia(0.2)
-        drop-shadow(0 14px 18px rgba(65, 18, 15, 0.28));
-    animation: logoFloat 4s ease-in-out infinite;
-}
-
-.blessing {
-    margin: 24px 0 22px;
-    font-size: 1rem;
+        sepia(0.1)
+        drop-shadow(0 14px 22px rgba(70, 14, 16, 0.28));
 }
 
 .details {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    margin: 25px auto 18px;
-    max-width: 620px;
+    max-width: 610px;
+    margin: 20px auto 22px;
+    border-top: 1px solid rgba(92, 14, 25, 0.28);
+    border-bottom: 1px solid rgba(92, 14, 25, 0.28);
+    background: rgba(255, 239, 222, 0.22);
 }
 
-.details div {
-    padding: 8px 10px;
-    border-inline-start: 1px solid rgba(92, 14, 25, 0.45);
+.detail-item {
+    padding: 13px 10px;
+    border-inline-start: 1px solid rgba(92, 14, 25, 0.25);
 }
 
-.details div:last-child {
+.detail-item:last-child {
     border-inline-start: none;
 }
 
-.details h3 {
-    font-size: 0.9rem;
-    color: #45101a;
-    margin-bottom: 7px;
-}
-
-.details p {
-    font-size: 0.92rem;
-    color: #2a0209;
-}
-
-.event-notes {
-    position: relative;
-    z-index: 3;
-    margin: 20px auto 10px;
-    max-width: 540px;
-}
-
-.event-notes p:first-child {
+.detail-item span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.82rem;
     font-weight: 700;
-    color: #4f0b1b;
-    margin-bottom: 9px;
+    color: #6a2634;
 }
 
-.event-notes p:last-child {
-    font-size: 0.88rem;
-    line-height: 1.9;
+.detail-item strong {
+    display: block;
+    font-size: clamp(0.9rem, 1.8vw, 1.02rem);
+    color: #2d070d;
+}
+
+.note {
+    max-width: 545px;
+    margin: 0 auto 20px;
+    padding: 0 6px;
+}
+
+.note p:first-child {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #4f0b1b;
+}
+
+.note p:last-child {
+    font-size: clamp(0.8rem, 1.7vw, 0.9rem);
+    line-height: 1.95;
     color: #5b3540;
 }
 
 .rsvp-form {
-    width: 100%;
-    max-width: 580px;
-    margin: 28px auto 16px;
-    padding: 22px 20px;
-    border: 1px solid rgba(92, 14, 25, 0.32);
+    max-width: 560px;
+    margin: 26px auto 22px;
+    padding: 21px 18px;
+    border: 1px solid rgba(92, 14, 25, 0.28);
     border-radius: 18px;
     background:
-        linear-gradient(180deg, rgba(255, 239, 224, 0.42), rgba(157, 91, 75, 0.18)),
-        rgba(255, 234, 217, 0.24);
+        linear-gradient(180deg, rgba(255, 246, 235, 0.5), rgba(178, 105, 88, 0.18)),
+        rgba(255, 239, 222, 0.2);
     box-shadow:
-        inset 0 0 28px rgba(255, 242, 224, 0.28),
-        0 16px 34px rgba(70, 8, 20, 0.16);
+        inset 0 0 24px rgba(255, 247, 235, 0.24),
+        0 14px 34px rgba(71, 8, 21, 0.16);
 }
 
 .rsvp-heading {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .rsvp-heading h2 {
-    font-size: 1.18rem;
+    font-size: clamp(1.08rem, 2.5vw, 1.32rem);
     color: #4f0b1b;
-    margin-bottom: 4px;
-}
-
-.rsvp-heading p {
-    font-size: 0.86rem;
-    color: #68404a;
 }
 
 .rsvp-fields {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 12px;
 }
 
 .rsvp-fields label {
@@ -264,92 +300,122 @@ body {
     display: block;
     margin-bottom: 6px;
     font-size: 0.84rem;
-    font-weight: 700;
-    color: #45101a;
+    font-weight: 800;
+    color: #5d1a29;
 }
 
 .rsvp-fields input,
 .rsvp-fields textarea {
     width: 100%;
-    border: 1px solid rgba(92, 14, 25, 0.28);
+    border: 1px solid rgba(92, 14, 25, 0.24);
     border-radius: 12px;
     padding: 10px 12px;
     font-family: inherit;
-    font-size: 0.92rem;
-    color: #2a0209;
-    background: rgba(255, 246, 237, 0.72);
+    font-size: 0.9rem;
+    color: #2d070d;
+    background: rgba(255, 250, 244, 0.74);
     outline: none;
-    transition: 0.25s ease;
+    transition:
+        border-color 0.24s ease,
+        box-shadow 0.24s ease,
+        background 0.24s ease;
 }
 
 .rsvp-fields textarea {
+    min-height: 82px;
     resize: vertical;
-    min-height: 84px;
 }
 
 .rsvp-fields input:focus,
 .rsvp-fields textarea:focus {
-    border-color: rgba(139, 23, 52, 0.72);
-    box-shadow: 0 0 0 3px rgba(139, 23, 52, 0.12);
-    background: rgba(255, 250, 246, 0.92);
+    border-color: rgba(141, 23, 52, 0.7);
+    background: rgba(255, 253, 249, 0.92);
+    box-shadow: 0 0 0 3px rgba(141, 23, 52, 0.12);
 }
 
 .attendance-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin: 16px 0 14px;
+    margin: 15px 0 14px;
 }
 
-.attendance-card {
+.attendance-option {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 48px;
-    padding: 10px;
-    border: 1px solid rgba(92, 14, 25, 0.28);
+    padding: 10px 12px;
+    border: 1px solid rgba(92, 14, 25, 0.25);
     border-radius: 999px;
     color: #4f0b1b;
-    background: rgba(255, 246, 237, 0.48);
+    background: rgba(255, 250, 244, 0.46);
     cursor: pointer;
+    overflow: hidden;
+    transition:
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.attendance-option::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    margin-left: 8px;
+    border: 2px solid rgba(79, 11, 27, 0.58);
+    border-radius: 50%;
+    background: rgba(255, 250, 244, 0.8);
+    box-shadow: inset 0 0 0 3px rgba(255, 250, 244, 0.9);
     transition: 0.25s ease;
 }
 
-.attendance-card input {
+.attendance-option input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
 
-.attendance-card span {
-    font-size: 0.86rem;
-    font-weight: 700;
+.attendance-option span {
+    font-size: 0.84rem;
+    font-weight: 800;
 }
 
-.attendance-card:has(input:checked) {
-    color: #fff;
-    border-color: rgba(75, 7, 23, 0.85);
-    background: linear-gradient(135deg, #4b0717, #8b1734);
-    box-shadow: 0 10px 22px rgba(65, 3, 18, 0.25);
+.attendance-option:has(input:checked) {
+    color: #fff8ee;
+    border-color: rgba(75, 7, 23, 0.82);
+    background: linear-gradient(135deg, #4b0717, #8d1734);
+    box-shadow: 0 10px 22px rgba(65, 3, 18, 0.24);
+}
+
+.attendance-option:has(input:checked)::before {
+    border-color: rgba(255, 238, 215, 0.92);
+    background: #f8d8a9;
+    box-shadow: inset 0 0 0 3px #6f0f28;
 }
 
 .rsvp-submit {
-    margin-top: 2px;
-    padding: 11px 32px;
     border: none;
     border-radius: 999px;
+    padding: 11px 30px;
     font-family: inherit;
-    font-size: 0.96rem;
-    color: #fff;
-    background: linear-gradient(135deg, #4b0717, #8b1734);
-    box-shadow: 0 10px 25px rgba(65, 3, 18, 0.34);
+    font-size: 0.94rem;
+    font-weight: 800;
+    color: #fff8ee;
+    background: linear-gradient(135deg, #4b0717, #8d1734);
+    box-shadow: 0 12px 25px rgba(65, 3, 18, 0.3);
     cursor: pointer;
-    transition: 0.3s ease;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        opacity 0.28s ease;
 }
 
 .rsvp-submit:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 14px 32px rgba(65, 3, 18, 0.46);
+    box-shadow: 0 16px 32px rgba(65, 3, 18, 0.42);
 }
 
 .rsvp-submit:disabled {
@@ -358,51 +424,68 @@ body {
 }
 
 .rsvp-message {
-    min-height: 28px;
+    min-height: 30px;
     margin-top: 12px;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 800;
     color: #4f0b1b;
 }
 
 .rsvp-message.error {
-    color: #8b1734;
+    color: #8d1734;
+}
+
+.rsvp-message.success {
+    animation: rsvpSuccess 0.7s ease both;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
 }
 
 .main-btn,
 .music-btn {
-    margin: 10px 5px 0;
-    padding: 12px 30px;
+    min-width: 148px;
     border-radius: 999px;
+    padding: 12px 28px;
     font-family: inherit;
-    font-size: 0.98rem;
+    font-size: 0.96rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        background 0.28s ease;
 }
 
 .main-btn {
     border: none;
-    color: #fff;
-    background: linear-gradient(135deg, #4b0717, #8b1734);
-    box-shadow: 0 10px 25px rgba(65, 3, 18, 0.38);
+    color: #fff8ee;
+    background: linear-gradient(135deg, #4b0717, #8d1734);
+    box-shadow: 0 12px 26px rgba(65, 3, 18, 0.36);
 }
 
 .music-btn {
-    color: #fff;
-    background: rgba(75, 7, 23, 0.86);
+    color: #fff8ee;
     border: 1px solid rgba(245, 210, 175, 0.5);
+    background: rgba(75, 7, 23, 0.86);
+    box-shadow: 0 10px 22px rgba(65, 3, 18, 0.24);
 }
 
 .main-btn:hover,
 .music-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 32px rgba(65, 3, 18, 0.5);
+    box-shadow: 0 16px 34px rgba(65, 3, 18, 0.48);
 }
 
-@keyframes cardEnter {
+@keyframes cardFadeIn {
     from {
         opacity: 0;
-        transform: translateY(35px) scale(0.97);
+        transform: translateY(28px) scale(0.98);
     }
     to {
         opacity: 1;
@@ -410,12 +493,58 @@ body {
     }
 }
 
-@keyframes chandelierFloat {
+@keyframes glowPulse {
     0%, 100% {
-        transform: translateY(0);
+        opacity: 0.72;
     }
     50% {
-        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+@keyframes chandelierFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-8px);
+    }
+}
+
+@keyframes curtainSway {
+    0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+        transform: translateX(-50%) rotate(0.7deg);
+    }
+}
+
+@keyframes candleFlicker {
+    0%, 100% {
+        opacity: 0.86;
+        filter:
+            drop-shadow(0 0 8px rgba(255, 207, 134, 0.5))
+            drop-shadow(0 12px 16px rgba(56, 5, 15, 0.25));
+    }
+    40% {
+        opacity: 1;
+        filter:
+            drop-shadow(0 0 15px rgba(255, 219, 153, 0.78))
+            drop-shadow(0 0 28px rgba(255, 180, 94, 0.28))
+            drop-shadow(0 12px 16px rgba(56, 5, 15, 0.25));
+    }
+    68% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes flowersDrift {
+    0%, 100% {
+        transform: translateX(50%) translateY(0);
+    }
+    50% {
+        transform: translateX(50%) translateY(-7px);
     }
 }
 
@@ -428,86 +557,77 @@ body {
     }
 }
 
-@keyframes glowPulse {
-    0%, 100% {
-        opacity: 0.78;
+@keyframes rsvpSuccess {
+    0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
     }
-    50% {
+    55% {
         opacity: 1;
+        transform: translateY(-2px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-@keyframes curtainSwayLeft {
-    0%, 100% {
-        transform: rotate(0deg);
-    }
-    50% {
-        transform: rotate(1deg);
-    }
-}
-
-@keyframes curtainSwayRight {
-    0%, 100% {
-        transform: rotate(0deg);
-    }
-    50% {
-        transform: rotate(-1deg);
-    }
-}
-
-@media (max-width: 650px) {
+@media (max-width: 700px) {
     .invite-page {
         padding: 8px;
     }
 
-    .card {
+    .invitation-card {
         min-height: 96vh;
-        padding: 96px 16px 34px;
+        border-radius: 18px;
+        padding: 118px 18px 132px;
+    }
+
+    .invitation-card::before {
+        inset: 9px;
         border-radius: 14px;
     }
 
-    .curtain {
-        height: 148px;
+    .decor-curtains {
+        top: -8px;
+        width: 138%;
     }
 
-    .chandelier {
-        font-size: 3.4rem;
-        margin-bottom: 44px;
+    .decor-chandelier {
+        top: 16px;
+        width: min(165px, 44vw);
     }
 
-    .bismillah {
-        font-size: 1.15rem;
+    .decor-flowers {
+        bottom: -14px;
+        width: 150%;
+    }
+
+    .decor-candles {
+        bottom: 34px;
+        width: min(104px, 27vw);
+    }
+
+    .decor-candles-left {
+        left: 8px;
+    }
+
+    .decor-candles-right {
+        right: 8px;
     }
 
     .verse {
-        font-size: 0.8rem;
-    }
-
-    .invite-text {
-        font-size: 0.96rem;
-    }
-
-    .logo-box img {
-        width: min(285px, 82vw);
+        line-height: 1.9;
     }
 
     .details {
         grid-template-columns: 1fr;
-        margin-top: 20px;
-    }
-
-    .details div {
-        border-inline-start: none;
-        border-bottom: 1px solid rgba(92, 14, 25, 0.25);
-    }
-
-    .event-notes p:last-child {
-        font-size: 0.82rem;
+        max-width: 360px;
     }
 
     .rsvp-form {
-        padding: 18px 14px;
-        border-radius: 14px;
+        padding: 18px 13px;
+        border-radius: 15px;
     }
 
     .rsvp-fields,
@@ -515,7 +635,43 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .attendance-card {
-        border-radius: 14px;
+    .attendance-option {
+        border-radius: 15px;
+    }
+
+    .detail-item {
+        border-inline-start: none;
+        border-bottom: 1px solid rgba(92, 14, 25, 0.2);
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .main-btn,
+    .music-btn {
+        min-width: 138px;
+        padding: 11px 22px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 410px) {
+    .invitation-card {
+        padding-inline: 13px;
+    }
+
+    .decor-candles {
+        opacity: 0.74;
+    }
+
+    .main-btn,
+    .music-btn {
+        width: 100%;
+        max-width: 240px;
     }
 }

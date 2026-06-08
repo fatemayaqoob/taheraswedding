@@ -1,7 +1,8 @@
 const LOCATION_URL =
     "https://maps.app.goo.gl/WxQ7GfCKb5vkETHJ6?g_st=ic";
 
-const RSVP_URL = "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
+const RSVP_URL =
+    "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
 
 const locationBtn =
     document.getElementById("locationBtn");
@@ -34,6 +35,56 @@ const rsvpMessage =
     document.getElementById("rsvpMessage");
 
 let isPlaying = false;
+let firstInteractionBound = false;
+
+const setMusicButton = () => {
+    musicBtn.textContent = isPlaying
+        ? "إيقاف الموسيقى"
+        : "تشغيل الموسيقى";
+};
+
+const playMusic = async () => {
+    try {
+        await bgMusic.play();
+        isPlaying = true;
+        setMusicButton();
+        return true;
+    } catch (error) {
+        isPlaying = false;
+        setMusicButton();
+        return false;
+    }
+};
+
+const pauseMusic = () => {
+    bgMusic.pause();
+    isPlaying = false;
+    setMusicButton();
+};
+
+const removeFirstInteractionListeners = () => {
+    document.removeEventListener("click", startMusicOnFirstInteraction);
+    document.removeEventListener("touchstart", startMusicOnFirstInteraction);
+    firstInteractionBound = false;
+};
+
+const startMusicOnFirstInteraction = async () => {
+    const started = await playMusic();
+
+    if (started) {
+        removeFirstInteractionListeners();
+    }
+};
+
+const bindFirstInteraction = () => {
+    if (firstInteractionBound) {
+        return;
+    }
+
+    document.addEventListener("click", startMusicOnFirstInteraction);
+    document.addEventListener("touchstart", startMusicOnFirstInteraction);
+    firstInteractionBound = true;
+};
 
 locationBtn.addEventListener("click", () => {
     window.open(LOCATION_URL, "_blank");
@@ -49,13 +100,19 @@ rsvpForm.addEventListener("submit", async (event) => {
     const attendance =
         rsvpForm.elements.attendance.value;
 
-    rsvpMessage.classList.remove("error");
+    rsvpMessage.classList.remove("error", "success");
     rsvpMessage.textContent = "";
 
     if (!name) {
         rsvpMessage.classList.add("error");
         rsvpMessage.textContent = "يرجى إدخال الاسم";
         rsvpName.focus();
+        return;
+    }
+
+    if (!attendance) {
+        rsvpMessage.classList.add("error");
+        rsvpMessage.textContent = "يرجى اختيار حالة الحضور";
         return;
     }
 
@@ -78,6 +135,7 @@ rsvpForm.addEventListener("submit", async (event) => {
             })
         });
 
+        rsvpMessage.classList.add("success");
         rsvpMessage.textContent =
             attendance === "يشرفنا حضوركم"
                 ? "شكراً لتأكيد حضوركم"
@@ -85,7 +143,6 @@ rsvpForm.addEventListener("submit", async (event) => {
 
         rsvpForm.reset();
     } catch (error) {
-        console.error(error);
         rsvpMessage.classList.add("error");
         rsvpMessage.textContent = "تعذر إرسال التأكيد، يرجى المحاولة مرة أخرى";
     } finally {
@@ -94,45 +151,24 @@ rsvpForm.addEventListener("submit", async (event) => {
     }
 });
 
-musicBtn.addEventListener("click", async () => {
-    try {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicBtn.textContent = "تشغيل الموسيقى";
-            isPlaying = false;
-        } else {
-            await bgMusic.play();
-            musicBtn.textContent = "إيقاف الموسيقى";
-            isPlaying = true;
-        }
-    } catch (error) {
-        console.error(error);
-        musicBtn.textContent = "اضغطي مرة أخرى";
+musicBtn.addEventListener("click", async (event) => {
+    event.stopPropagation();
+
+    if (isPlaying) {
+        pauseMusic();
+        return;
     }
+
+    await playMusic();
 });
 
 window.addEventListener("load", async () => {
     bgMusic.volume = 0.55;
+    setMusicButton();
 
-    try {
-        await bgMusic.play();
+    const started = await playMusic();
 
-        isPlaying = true;
-        musicBtn.textContent = "إيقاف الموسيقى";
-    } catch {
-        const startMusic = async () => {
-            try {
-                await bgMusic.play();
-
-                isPlaying = true;
-                musicBtn.textContent = "إيقاف الموسيقى";
-
-                document.removeEventListener("touchstart", startMusic);
-                document.removeEventListener("click", startMusic);
-            } catch {}
-        };
-
-        document.addEventListener("touchstart", startMusic);
-        document.addEventListener("click", startMusic);
+    if (!started) {
+        bindFirstInteraction();
     }
 });
