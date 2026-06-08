@@ -284,16 +284,14 @@ body {
 
 .rsvp-fields {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
+    max-width: 380px;
+    margin: 0 auto;
 }
 
 .rsvp-fields label {
     text-align: right;
-}
-
-.rsvp-fields label:last-child {
-    grid-column: 1 / -1;
 }
 
 .rsvp-fields span {
@@ -304,8 +302,7 @@ body {
     color: #5d1a29;
 }
 
-.rsvp-fields input,
-.rsvp-fields textarea {
+.rsvp-fields input {
     width: 100%;
     border: 1px solid rgba(92, 14, 25, 0.24);
     border-radius: 12px;
@@ -321,13 +318,7 @@ body {
         background 0.24s ease;
 }
 
-.rsvp-fields textarea {
-    min-height: 82px;
-    resize: vertical;
-}
-
-.rsvp-fields input:focus,
-.rsvp-fields textarea:focus {
+.rsvp-fields input:focus {
     border-color: rgba(141, 23, 52, 0.7);
     background: rgba(255, 253, 249, 0.92);
     box-shadow: 0 0 0 3px rgba(141, 23, 52, 0.12);

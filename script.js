@@ -1,8 +1,7 @@
 const LOCATION_URL =
     "https://maps.app.goo.gl/WxQ7GfCKb5vkETHJ6?g_st=ic";
 
-const RSVP_URL =
-    "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
+const RSVP_URL = "PUT_GOOGLE_APPS_SCRIPT_URL_HERE";
 
 const locationBtn =
     document.getElementById("locationBtn");
@@ -18,15 +17,6 @@ const rsvpForm =
 
 const rsvpName =
     document.getElementById("rsvpName");
-
-const rsvpPhone =
-    document.getElementById("rsvpPhone");
-
-const rsvpGuests =
-    document.getElementById("rsvpGuests");
-
-const rsvpNotes =
-    document.getElementById("rsvpNotes");
 
 const rsvpSubmit =
     document.getElementById("rsvpSubmit");
@@ -94,9 +84,6 @@ rsvpForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const name = rsvpName.value.trim();
-    const phone = rsvpPhone.value.trim();
-    const guests = rsvpGuests.value.trim();
-    const notes = rsvpNotes.value.trim();
     const attendance =
         rsvpForm.elements.attendance.value;
 
@@ -128,10 +115,7 @@ rsvpForm.addEventListener("submit", async (event) => {
             },
             body: JSON.stringify({
                 name,
-                phone,
-                guests,
-                attendance,
-                notes
+                attendance
             })
         });
 
