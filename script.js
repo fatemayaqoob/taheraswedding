@@ -1,7 +1,7 @@
 const LOCATION_URL =
     "https://maps.app.goo.gl/WxQ7GfCKb5vkETHJ6?g_st=ic";
 
-const RSVP_URL = "https://script.google.com/macros/s/AKfycbwtrpmUIg_j0d469HizCNZFi5nOgyKgZTH2LwaApuWgf9zYvY8u-fn4uV8HMCcSyOAq/exec";
+const RSVP_URL = "https://script.google.com/macros/s/AKfycbznjuUY1vD3sjoEtKPH1WbwbZILUgk_Pqy4kZhg-9K2a-I-RMFAOrxXovTpFZEORacb/exec";
 
 const locationBtn =
     document.getElementById("locationBtn");
