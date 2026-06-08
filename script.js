@@ -24,6 +24,9 @@ const rsvpSubmit =
 const rsvpMessage =
     document.getElementById("rsvpMessage");
 
+const ATTENDING_VALUE = "يشرفنا حضوركم";
+const NOT_ATTENDING_VALUE = "نعتذر عن عدم التمكن من الحضور";
+
 let isPlaying = false;
 let firstInteractionBound = false;
 
@@ -120,10 +123,14 @@ rsvpForm.addEventListener("submit", async (event) => {
         });
 
         rsvpMessage.classList.add("success");
-        rsvpMessage.textContent =
-            attendance === "يشرفنا حضوركم"
-                ? "شكراً لتأكيد حضوركم"
-                : "شكراً لإشعارنا بعدم التمكن من الحضور";
+
+        if (attendance === ATTENDING_VALUE) {
+            rsvpMessage.textContent = "شكراً لتأكيد حضوركم";
+        }
+
+        if (attendance === NOT_ATTENDING_VALUE) {
+            rsvpMessage.textContent = "شكراً لإشعارنا بعدم التمكن من الحضور";
+        }
 
         rsvpForm.reset();
     } catch (error) {
