@@ -24,8 +24,8 @@ const rsvpSubmit =
 const rsvpMessage =
     document.getElementById("rsvpMessage");
 
-const ATTENDING_VALUE = "يشرفنا حضوركم";
-const NOT_ATTENDING_VALUE = "نعتذر عن عدم التمكن من الحضور";
+const ATTENDING_VALUE = "سأحضر";
+const NOT_ATTENDING_VALUE = "أعتذر عن عدم التمكن من الحضور";
 
 let isPlaying = false;
 let firstInteractionBound = false;

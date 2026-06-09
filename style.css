@@ -157,19 +157,15 @@ body {
     margin: 0 auto;
 }
 
-.bismillah {
-    margin-bottom: 18px;
-    font-size: clamp(1.08rem, 2.4vw, 1.42rem);
+.private-title {
+    margin-bottom: 16px;
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
     font-weight: 800;
+    line-height: 1.4;
     color: #4f0b1b;
-}
-
-.verse {
-    margin: 0 auto 24px;
-    max-width: 560px;
-    font-size: clamp(0.82rem, 1.8vw, 0.98rem);
-    line-height: 2.05;
-    color: #3e1118;
+    text-shadow:
+        0 1px 0 rgba(255, 247, 236, 0.72),
+        0 10px 24px rgba(83, 8, 23, 0.14);
 }
 
 .praise {
@@ -246,14 +242,7 @@ body {
     padding: 0 6px;
 }
 
-.note p:first-child {
-    margin-bottom: 8px;
-    font-size: 1rem;
-    font-weight: 800;
-    color: #4f0b1b;
-}
-
-.note p:last-child {
+.note p {
     font-size: clamp(0.8rem, 1.7vw, 0.9rem);
     line-height: 1.95;
     color: #5b3540;
@@ -608,10 +597,6 @@ body {
 
     .decor-candles-right {
         right: 8px;
-    }
-
-    .verse {
-        line-height: 1.9;
     }
 
     .details {
